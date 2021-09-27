@@ -30,3 +30,27 @@ var makeDancer = function(top, left, timeBetweenSteps) {
 
   return dancer;
 };
+
+// Creates and returns a new dancer object that can step
+var Dancer = function(top, left, timeBetweenSteps) {
+  this.$node = $('<span class="dancer"></span>');
+  this.timeBetweenSteps = timeBetweenSteps;
+  this.step();
+  this.setPosition(top, left);
+};
+
+Dancer.prototype.step = function() {
+  var context = this;
+  setTimeout(function() {
+    context.step();
+  }, this.timeBetweenSteps);
+  // or you can do `.bind(this)` to the anon func
+};
+
+Dancer.prototype.setPosition = function(top, left) {
+  var styleSettings = {
+    top: top,
+    left: left,
+  };
+  this.$node.css(styleSettings);
+};
